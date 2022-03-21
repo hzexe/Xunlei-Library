@@ -1,0 +1,3 @@
+[submodule "Libs/skrapr"]
+	path = Libs/skrapr
+	url = https://github.com/hzexe/skrapr.git

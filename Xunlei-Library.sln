@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hzexe.Xunlei-Library", "Hzexe.Xunlei-Library\Hzexe.Xunlei-Library.csproj", "{48944BF4-D505-4B68-8500-FB68C87AB4DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hzexe.Xunlei-LibraryTests", "Hzexe.Xunlei-LibraryTests\Hzexe.Xunlei-LibraryTests.csproj", "{4E8ABAE1-3E07-41B0-A7B9-71CAAD918C5C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaristaLabs.Skrapr.ChromeDevTools", "Libs\skrapr\src\BaristaLabs.Skrapr.ChromeDevTools\BaristaLabs.Skrapr.ChromeDevTools.csproj", "{430AFEC8-A41A-4BB8-8742-CF44B688E06F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaristaLabs.Skrapr.Core", "Libs\skrapr\src\BaristaLabs.Skrapr.Core\BaristaLabs.Skrapr.Core.csproj", "{270C3048-A6D8-43D6-8ECE-567A5C17A967}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rd", "3rd", "{918CEC97-02BB-458E-BEE5-B0B22956CD01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA822C00-5FB4-4253-966C-1C5C56C11A4D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48944BF4-D505-4B68-8500-FB68C87AB4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48944BF4-D505-4B68-8500-FB68C87AB4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48944BF4-D505-4B68-8500-FB68C87AB4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48944BF4-D505-4B68-8500-FB68C87AB4DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E8ABAE1-3E07-41B0-A7B9-71CAAD918C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8ABAE1-3E07-41B0-A7B9-71CAAD918C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8ABAE1-3E07-41B0-A7B9-71CAAD918C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8ABAE1-3E07-41B0-A7B9-71CAAD918C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{430AFEC8-A41A-4BB8-8742-CF44B688E06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{430AFEC8-A41A-4BB8-8742-CF44B688E06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{430AFEC8-A41A-4BB8-8742-CF44B688E06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{430AFEC8-A41A-4BB8-8742-CF44B688E06F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{270C3048-A6D8-43D6-8ECE-567A5C17A967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270C3048-A6D8-43D6-8ECE-567A5C17A967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270C3048-A6D8-43D6-8ECE-567A5C17A967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270C3048-A6D8-43D6-8ECE-567A5C17A967}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{430AFEC8-A41A-4BB8-8742-CF44B688E06F} = {918CEC97-02BB-458E-BEE5-B0B22956CD01}
+		{270C3048-A6D8-43D6-8ECE-567A5C17A967} = {918CEC97-02BB-458E-BEE5-B0B22956CD01}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60BFB05C-E7F6-4496-93B5-00D837C6E717}
+	EndGlobalSection
+EndGlobal

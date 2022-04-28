@@ -1,5 +1,8 @@
 # Xunlei-Library
 非官方的迅雷接口封状库。
+
+[![.NET](https://github.com/hzexe/Xunlei-Library/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hzexe/Xunlei-Library/actions/workflows/dotnet.yml)
+
 ### 实现原理
 调用windows版迅雷实现快速下载.
 

@@ -21,7 +21,7 @@ namespace Hzexe.Xunlei_Library.Tests
             var serviceProvider = new ServiceCollection()
               .AddLogging()
               .BuildServiceProvider();
-            api = new Api(serviceProvider,@"D:\Program Files\Thunder\Program\Thunder.exe", 64321);
+            api = new Api(serviceProvider, @"C:\Program Files (x86)\Thunder Network\xunlei\Program\Thunder.exe", 64321);
         }
 
         [TestMethod()]

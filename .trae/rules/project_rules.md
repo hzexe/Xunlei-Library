@@ -1,0 +1,2 @@
+本项目旨在自动化的使用windows版迅雷，方向是通过wine运行它以实现比较快速的下载。
+原理是通过--remote-debugging-port参数启动迅雷后获取调试端口，使用BaristaLabs.Skrapr库操作迅雷实现迅雷的登录、下载和任务管理.

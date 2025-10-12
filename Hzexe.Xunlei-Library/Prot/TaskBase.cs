@@ -1,31 +1,311 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FreeSql.DataAnnotations;
 
 namespace Hzexe.Xunlei_Library.Prot
 {
-    internal class TaskBase
+    /// <summary>
+    /// 迅雷任务数据库实体类，对应TaskBase表
+    /// </summary>
+    [Table(Name = "TaskBase")]
+    public class TaskBase
     {
+        /// <summary>
+        /// 任务唯一标识符
+        /// </summary>
         public Int64 TaskId { get; set; }
 
+        /// <summary>
+        /// 任务类型(1:HTTP 2:BT 3:磁力)
+        /// </summary>
         public int Type { get; set; }
 
+        /// <summary>
+        /// 任务状态(5:下载中 7:已删除 8:已完成)
+        /// </summary>
         public int Status { get; set; }
 
+        /// <summary>
+        /// 状态变更时间(时间戳)
+        /// </summary>
+        public long StatusChangeTime { get; set; }
+
+        /// <summary>
+        /// 文件保存路径
+        /// </summary>
         public string? SavePath { get; set; }
 
+        /// <summary>
+        /// 总接收大小(字节)
+        /// </summary>
+        public long TotalReceiveSize { get; set; }
+
+        /// <summary>
+        /// 总发送大小(字节)
+        /// </summary>
+        public long TotalSendSize { get; set; }
+
+        /// <summary>
+        /// 有效接收大小(字节)
+        /// </summary>
+        public long TotalReceiveValidSize { get; set; }
+
+        /// <summary>
+        /// 总上传大小(字节)
+        /// </summary>
+        public long TotalUploadSize { get; set; }
+
+        /// <summary>
+        /// 创建时间(时间戳)
+        /// </summary>
         public long CreationTime { get; set; }
 
+        /// <summary>
+        /// 文件是否已创建(0:未创建 1:已创建)
+        /// </summary>
+        public int FileCreated { get; set; }
+
+        /// <summary>
+        /// 完成时间(时间戳)
+        /// </summary>
         public long CompletionTime { get; set; }
 
+        /// <summary>
+        /// 下载周期
+        /// </summary>
+        public long DownloadingPeriod { get; set; }
+
+        /// <summary>
+        /// 移入回收站时间(时间戳)
+        /// </summary>
+        public long RemovingToRecycleTime { get; set; }
+
+        /// <summary>
+        /// 失败错误代码
+        /// </summary>
         public int FailureErrorCode { get; set; }
 
+        /// <summary>
+        /// 下载链接
+        /// </summary>
         public string Url { get; set; } = string.Empty;
 
+        /// <summary>
+        /// 参考链接
+        /// </summary>
+        public string? ReferenceUrl { get; set; }
+
+        /// <summary>
+        /// 资源大小(字节)
+        /// </summary>
+        public long ResourceSize { get; set; }
+
+        /// <summary>
+        /// 文件名
+        /// </summary>
         public string Name { get; set; } = string.Empty;
 
+        /// <summary>
+        /// 内容ID(BLOB类型)
+        /// </summary>
+        public byte[]? Cid { get; set; }
 
+        /// <summary>
+        /// 全局内容ID(BLOB类型)
+        /// </summary>
+        public byte[]? Gcid { get; set; }
+
+        /// <summary>
+        /// 描述信息
+        /// </summary>
+        public string? Description { get; set; }
+
+        /// <summary>
+        /// 分类ID
+        /// </summary>
+        public int CategoryId { get; set; }
+
+        /// <summary>
+        /// 资源查询内容ID(BLOB类型)
+        /// </summary>
+        public byte[]? ResourceQueryCid { get; set; }
+
+        /// <summary>
+        /// 创建请求类型
+        /// </summary>
+        public int CreationRequestType { get; set; }
+
+        /// <summary>
+        /// 启动模式
+        /// </summary>
+        public int StartMode { get; set; }
+
+        /// <summary>
+        /// 命名类型
+        /// </summary>
+        public int NamingType { get; set; }
+
+        /// <summary>
+        /// 统计参考链接
+        /// </summary>
+        public string? StatisticsReferenceUrl { get; set; }
+
+        /// <summary>
+        /// 用户已读标记
+        /// </summary>
+        public int UserRead { get; set; }
+
+        /// <summary>
+        /// 文件安全标记
+        /// </summary>
+        public int FileSafetyFlag { get; set; }
+
+        /// <summary>
+        /// 可播放标记
+        /// </summary>
+        public int Playable { get; set; }
+
+        /// <summary>
+        /// 块信息(BLOB类型)
+        /// </summary>
+        public byte[]? BlockInfo { get; set; }
+
+        /// <summary>
+        /// 完成后打开标记
+        /// </summary>
+        public int OpenOnComplete { get; set; }
+
+        /// <summary>
+        /// 特殊类型
+        /// </summary>
+        public int SpecialType { get; set; }
+
+        /// <summary>
+        /// 代理信息(BLOB类型)
+        /// </summary>
+        public byte[]? Proxy { get; set; }
+
+        /// <summary>
+        /// 原始接收大小
+        /// </summary>
+        public long OriginReceiveSize { get; set; }
+
+        /// <summary>
+        /// P2P接收大小
+        /// </summary>
+        public long P2pReceiveSize { get; set; }
+
+        /// <summary>
+        /// P2S接收大小
+        /// </summary>
+        public long P2sReceiveSize { get; set; }
+
+        /// <summary>
+        /// 离线接收大小
+        /// </summary>
+        public long OfflineReceiveSize { get; set; }
+
+        /// <summary>
+        /// VIP接收大小
+        /// </summary>
+        public long VipReceiveSize { get; set; }
+
+        /// <summary>
+        /// VIP资源启用必要标记
+        /// </summary>
+        public int VipResourceEnableNecessary { get; set; }
+
+        /// <summary>
+        /// 消耗的VIP大小
+        /// </summary>
+        public long ConsumedVipSize { get; set; }
+
+        /// <summary>
+        /// 禁止标记
+        /// </summary>
+        public int Forbidden { get; set; }
+
+        /// <summary>
+        /// 可选通道数据大小(BLOB类型)
+        /// </summary>
+        public byte[]? OptionalChannelDataSize { get; set; }
+
+        /// <summary>
+        /// 所有者产品ID
+        /// </summary>
+        public int OwnerProductId { get; set; }
+
+        /// <summary>
+        /// 用户数据(BLOB类型)
+        /// </summary>
+        public byte[]? UserData { get; set; }
+
+        /// <summary>
+        /// URL代码页
+        /// </summary>
+        public int UrlCodePage { get; set; }
+
+        /// <summary>
+        /// 参考链接代码页
+        /// </summary>
+        public int ReferenceUrlCodePage { get; set; }
+
+        /// <summary>
+        /// 统计参考链接代码页
+        /// </summary>
+        public int StatisticsReferenceUrlCodePage { get; set; }
+
+        /// <summary>
+        /// 组任务ID
+        /// </summary>
+        public long GroupTaskId { get; set; }
+
+        /// <summary>
+        /// 下载子任务
+        /// </summary>
+        public int DownloadSubTask { get; set; }
+
+        /// <summary>
+        /// 标签值
+        /// </summary>
+        public int TagValue { get; set; }
+
+        /// <summary>
+        /// 内部NAT接收大小
+        /// </summary>
+        public long InnerNatReceiveSize { get; set; }
+
+        /// <summary>
+        /// 附加标记
+        /// </summary>
+        public int AdditionFlag { get; set; }
+
+        /// <summary>
+        /// 产品信息
+        /// </summary>
+        public string? ProductInfo { get; set; }
+
+        /// <summary>
+        /// 来源
+        /// </summary>
+        public string? Origin { get; set; }
+
+        /// <summary>
+        /// 免费DCDN接收大小
+        /// </summary>
+        public long FreeDcdnReceiveSize { get; set; }
+
+        /// <summary>
+        /// 播放位置
+        /// </summary>
+        public int PlayPosition { get; set; }
+
+        /// <summary>
+        /// 持续时间
+        /// </summary>
+        public int Duration { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using System.Drawing;
+using Microsoft.Extensions.Configuration;
 
 namespace Hzexe.Xunlei_Library.Tests
 {
@@ -14,14 +15,22 @@ namespace Hzexe.Xunlei_Library.Tests
     public class ApiTests
     {
         Api api;
-        [TestMethod()]
+        // ...原有代码...
+
         [TestInitialize]
         public void ApiTest()
         {
+            var cfg = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json") // 需要 Microsoft.Extensions.Configuration.Json 包
+                .Build();
+
             var serviceProvider = new ServiceCollection()
               .AddLogging()
+              .AddSingleton<IConfiguration>(cfg)
+              .AddSingleton<Api>()
               .BuildServiceProvider();
-            api = new Api(serviceProvider, @"C:\Program Files (x86)\Thunder Network\xunlei\Program\Thunder.exe", 64321);
+
+            api = serviceProvider.GetRequiredService<Api>();
         }
 
         [TestMethod()]
@@ -36,6 +45,24 @@ namespace Hzexe.Xunlei_Library.Tests
             var tasks=await api.GetAllTasksAsync();
             Assert.IsNotNull(tasks);
         }
+
+  [TestMethod()]
+        public async Task DownloadMagnetTest()
+        {
+           long? taskid =await api.DownloadLinkAsync(@"magnet:?xt=urn:btih:2b7f69845086611ae23c63bbda3f088a782938c4");
+            if (taskid.HasValue)
+            {
+                var task = await api.GetTasksAsync(taskid.Value);
+                Assert.IsNotNull(task);
+            }
+            var tasks=await api.GetAllTasksAsync();
+            Assert.IsNotNull(tasks);
+        }
+
+
+
+
+
 
         [TestMethod()]
         public async Task LoginByPasswordTest()
@@ -59,7 +86,7 @@ namespace Hzexe.Xunlei_Library.Tests
             string? uname = await api.GetLoginInfoAsync();
             if (string.IsNullOrEmpty(uname))
             {
-                var picdata = await api.LoginByEWMAsync();
+                var picdata = await api.GetQRCodeAsync();
                 using (var ms = new System.IO.MemoryStream(picdata))
                 {
                     var bitmap = Image.FromStream(ms);

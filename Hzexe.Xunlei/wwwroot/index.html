@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迅雷远程下载</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- 自定义CSS -->
+    <link rel="stylesheet" href="css/xunlei-style.css?v=3">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="top-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <div class="logo">
+                        <i class="bi bi-cloud-download"></i>
+                        <span>迅雷远程下载</span>
+                    </div>
+                </div>
+                <div class="col text-end">
+                    <div class="user-info">
+                        <div class="avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <div class="user-details">
+                            <div class="username" id="username-display">未登录</div>
+                            <div class="user-action">
+                                <a href="#" id="login-btn">登录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="main-content">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link" data-tab="downloading">
+                            <i class="bi bi-download"></i>
+                            <span>下载中</span>
+                            <span class="badge bg-primary" id="downloading-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="completed">
+                            <i class="bi bi-check-circle"></i>
+                            <span>已完成</span>
+                            <span class="badge bg-secondary" id="completed-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn btn-primary btn-block" id="new-task-btn">
+                    <i class="bi bi-plus-circle"></i>
+                    新建任务
+                </button>
+            </div>
+        </aside>
+
+        <!-- 内容区 -->
+        <section class="content-area">
+            <!-- 任务列表容器 -->
+            <div class="tasks-container">
+                <!-- 下载中任务 -->
+                <div class="tab-content active" id="downloading-content">
+                    <div class="loading-indicator d-none" id="downloading-loading">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">加载中...</span>
+                        </div>
+                    </div>
+                    <div class="tasks-list" id="downloading-tasks-container">
+                        <!-- 任务列表将通过JavaScript动态加载 -->
+                    </div>
+                    
+                    <!-- 分页容器 -->
+                    <div class="pagination-container" id="downloading-pagination"></div>
+                </div>
+
+                <!-- 已完成任务 -->
+                <div class="tab-content" id="completed-content">
+                    <div class="loading-indicator d-none" id="completed-loading">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">加载中...</span>
+                        </div>
+                    </div>
+                    <div class="tasks-list" id="completed-tasks-container">
+                        <!-- 任务列表将通过JavaScript动态加载 -->
+                    </div>
+                    
+                    <!-- 分页容器 -->
+                    <div class="pagination-container" id="completed-pagination"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 新建任务模态框 -->
+    <div class="modal fade" id="newTaskModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">新建下载任务</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="urlTaskForm">
+                        <div class="mb-3">
+                            <label for="url" class="form-label">下载链接</label>
+                            <textarea class="form-control" id="url" name="url" rows="3" placeholder="请输入下载链接，支持HTTP、HTTPS、FTP、ED2K、Magnet等协议"></textarea>
+                            <div class="protocol-hint">支持的协议：HTTP、HTTPS、FTP、ED2K、Magnet等</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="createTaskBtn">开始下载</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登录模态框 -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">登录迅雷账号</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs mb-3" id="loginTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-login" type="button" role="tab" aria-controls="password-login" aria-selected="true">
+                                密码登录
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="qrcode-tab" data-bs-toggle="tab" data-bs-target="#qrcode-login" type="button" role="tab" aria-controls="qrcode-login" aria-selected="false">
+                                扫码登录
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="loginTabsContent">
+                        <!-- 密码登录 -->
+                        <div class="tab-pane fade show active" id="password-login" role="tabpanel" aria-labelledby="password-tab">
+                            <form id="passwordLoginForm">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">用户名</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">密码</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                                </div>
+                                <div class="d-grid">
+                                    <button type="button" class="btn btn-primary" id="passwordLoginBtn">登录</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- 扫码登录 -->
+                        <div class="tab-pane fade" id="qrcode-login" role="tabpanel" aria-labelledby="qrcode-tab">
+                            <div class="text-center">
+                                <div id="qrcode-container" class="mb-3">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">加载中...</span>
+                                    </div>
+                                </div>
+                                <p class="text-muted">请使用迅雷手机客户端扫描二维码登录</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- SignalR客户端库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    
+    <!-- 自定义JavaScript -->
+    <script src="js/xunlei-app.js?v=6"></script>
+</body>
+</html>
